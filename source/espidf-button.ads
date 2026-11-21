@@ -8,6 +8,22 @@ with ESPIDF.Driver.GPIO;
 
 package ESPIDF.Button is
 
+   type button_event_t is
+     (BUTTON_PRESS_DOWN,
+      BUTTON_PRESS_UP,
+      BUTTON_PRESS_REPEAT,
+      BUTTON_PRESS_REPEAT_DONE,
+      BUTTON_SINGLE_CLICK,
+      BUTTON_DOUBLE_CLICK,
+      BUTTON_MULTIPLE_CLICK,
+      BUTTON_LONG_PRESS_START,
+      BUTTON_LONG_PRESS_HOLD,
+      BUTTON_LONG_PRESS_UP,
+      BUTTON_PRESS_END,
+      BUTTON_EVENT_MAX,
+      BUTTON_NONE_PRESS)
+   with Convention => C;
+
    type button_config_t is limited private;
 
    type button_gpio_config_t is limited private;
