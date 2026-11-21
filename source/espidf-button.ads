@@ -4,6 +4,8 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with System;
+
 with ESPIDF.Driver.GPIO;
 
 package ESPIDF.Button is
@@ -48,16 +50,37 @@ package ESPIDF.Button is
 
    type button_handle_t is access all button_dev_t with Convention => C;
 
+   type button_cb_t is
+     access procedure
+       (button_handle : in out button_dev_t; usr_data : System.Address)
+   with Convention => C;
+
    function iot_button_new_gpio_device
-     (button_config : in button_config_t;
-      gpio_config   : in button_gpio_config_t;
+     (button_config : button_config_t;
+      gpio_config   : button_gpio_config_t;
       ret_button    : out button_handle_t) return ESPIDF.esp_err_t
    with Import, Convention => C, External_Name => "iot_button_new_gpio_device";
 
    procedure iot_button_new_gpio_device
-     (button_config : in button_config_t;
-      gpio_config   : in button_gpio_config_t;
+     (button_config : button_config_t;
+      gpio_config   : button_gpio_config_t;
       ret_button    : out button_handle_t);
+
+   function iot_button_register_cb
+     (btn_handle : in out button_dev_t;
+      event      : button_event_t;
+      event_args : in out button_event_args_t;
+      cb         : button_cb_t;
+      usr_data   : System.Address := System.Null_Address)
+      return ESPIDF.esp_err_t
+   with Import, Convention => C, External_Name => "iot_button_register_cb";
+
+   procedure iot_button_register_cb
+     (btn_handle : in out button_dev_t;
+      event      : button_event_t;
+      event_args : in out button_event_args_t;
+      cb         : button_cb_t;
+      usr_data   : System.Address := System.Null_Address);
 
 private
 
