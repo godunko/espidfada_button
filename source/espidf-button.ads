@@ -103,7 +103,7 @@ private
      new C_Object_Storage (1 .. sizeof_button_gpio_config_t)
    with Convention => C, Default_Component_Value => 0;
 
-   type button_dev_t is null record with Convention => C;
+   type button_dev_t is limited null record with Convention => C;
 
    sizeof_button_event_args_t : constant int
    with
