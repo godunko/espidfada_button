@@ -4,11 +4,27 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with ESPIDF.Driver.GPIO;
+
 package ESPIDF.Button is
 
    type button_config_t is limited private;
 
    type button_gpio_config_t is limited private;
+
+   procedure Set_gpio_num
+     (Self : in out button_gpio_config_t; To : ESPIDF.Driver.GPIO.gpio_num_t)
+   with
+     Import,
+     Convention    => C,
+     External_Name => "__ada_SET_button_gpio_config_t_gpio_num";
+
+   procedure Set_active_level
+     (Self : in out button_gpio_config_t; To : uint8_t)
+   with
+     Import,
+     Convention    => C,
+     External_Name => "__ada_SET_button_gpio_config_t_active_level";
 
 private
 
