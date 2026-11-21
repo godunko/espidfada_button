@@ -8,6 +8,7 @@
 #include "iot_button.h"
 
 int __ada_SIZEOF_button_config_t = sizeof(button_config_t);
+int __ada_SIZEOF_button_event_args_t = sizeof(button_event_args_t);
 int __ada_SIZEOF_button_gpio_config_t = sizeof(button_gpio_config_t);
 
 void __ada_SET_button_gpio_config_t_gpio_num(button_gpio_config_t *self, gpio_num_t to)

@@ -42,6 +42,8 @@ package ESPIDF.Button is
      Convention    => C,
      External_Name => "__ada_SET_button_gpio_config_t_active_level";
 
+   type button_event_args_t is limited private;
+
    type button_dev_t is limited private;
 
    type button_handle_t is access all button_dev_t with Convention => C;
@@ -79,5 +81,15 @@ private
    with Convention => C, Default_Component_Value => 0;
 
    type button_dev_t is null record with Convention => C;
+
+   sizeof_button_event_args_t : constant int
+   with
+     Import,
+     Convention    => C,
+     External_Name => "__ada_SIZEOF_button_event_args_t";
+
+   type button_event_args_t is
+     new C_Object_Storage (1 .. sizeof_button_event_args_t)
+   with Convention => C, Default_Component_Value => 0;
 
 end ESPIDF.Button;
