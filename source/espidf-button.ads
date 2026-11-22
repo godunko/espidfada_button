@@ -8,6 +8,8 @@ with System;
 
 with ESPIDF.Driver.GPIO;
 
+private with ESPIDF.Constants.Button;
+
 package ESPIDF.Button is
 
    type button_event_t is
@@ -84,35 +86,32 @@ package ESPIDF.Button is
 
 private
 
-   sizeof_button_config_t : constant int
+   type button_config_t is
+     new C_Object_Storage (1 .. ESPIDF.Constants.Button.sizeof_button_config_t)
    with
-     Import,
-     Convention    => C,
-     External_Name => "__ada_SIZEOF_button_config_t";
-
-   type button_config_t is new C_Object_Storage (1 .. sizeof_button_config_t)
-   with Convention => C, Default_Component_Value => 0;
-
-   sizeof_button_gpio_config_t : constant int
-   with
-     Import,
-     Convention    => C,
-     External_Name => "__ada_SIZEOF_button_gpio_config_t";
+     Convention              => C,
+     Alignment               =>
+       ESPIDF.Constants.Button.alignof_button_config_t,
+     Default_Component_Value => 0;
 
    type button_gpio_config_t is
-     new C_Object_Storage (1 .. sizeof_button_gpio_config_t)
-   with Convention => C, Default_Component_Value => 0;
+     new C_Object_Storage
+          (1 .. ESPIDF.Constants.Button.sizeof_button_gpio_config_t)
+   with
+     Convention              => C,
+     Alignment               =>
+       ESPIDF.Constants.Button.alignof_button_gpio_config_t,
+     Default_Component_Value => 0;
 
    type button_dev_t is limited null record with Convention => C;
 
-   sizeof_button_event_args_t : constant int
-   with
-     Import,
-     Convention    => C,
-     External_Name => "__ada_SIZEOF_button_event_args_t";
-
    type button_event_args_t is
-     new C_Object_Storage (1 .. sizeof_button_event_args_t)
-   with Convention => C, Default_Component_Value => 0;
+     new C_Object_Storage
+          (1 .. ESPIDF.Constants.Button.sizeof_button_event_args_t)
+   with
+     Convention              => C,
+     Alignment               =>
+       ESPIDF.Constants.Button.alignof_button_event_args_t,
+     Default_Component_Value => 0;
 
 end ESPIDF.Button;
